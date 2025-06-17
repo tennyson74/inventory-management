@@ -1,5 +1,5 @@
-# Use Amazon Corretto (AWS's OpenJDK distribution)
-FROM maven:3.8.1-amazoncorretto-15 AS build
+# Use an official Maven image with Java 11
+FROM maven:3.8.1-openjdk-11-slim AS build
 
 # Set the working directory
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Final stage
-FROM amazoncorretto:15-alpine
+FROM openjdk:11-jre-slim
 
 WORKDIR /app
 
